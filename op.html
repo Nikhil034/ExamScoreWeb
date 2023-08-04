@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subject Selection</title>
+</head>
+<body>
+    <form>
+        <label for="subject_code">Select a subject code:</label>
+        <select name="subject_code" id="subject_code" onchange="updateSubject()">
+            <option value="subject1">Subject 1</option>
+            <option value="subject2">Subject 2</option>
+            <option value="subject3">Subject 3</option>
+            <!-- Add more subject codes as needed -->
+        </select>
+        
+        <label for="subject">Selected Subject:</label>
+        <select name="subject" id="subject">
+            <!-- Options will be populated dynamically using JavaScript -->
+        </select>
+    </form>
+
+    <script>
+        function updateSubject() {
+            // Get the selected subject code from the first dropdown
+            var selectedSubjectCode = document.getElementById("subject_code").value;
+
+            // Get the second dropdown
+            var subjectDropdown = document.getElementById("subject");
+
+            // Clear previous options
+            subjectDropdown.innerHTML = "";
+
+            // Add appropriate options based on the selected subject code
+            switch (selectedSubjectCode) {
+                case "subject1":
+                    addOption(subjectDropdown, "Subject 1 Option 1", "subject1_opt1");
+                    addOption(subjectDropdown, "Subject 1 Option 2", "subject1_opt2");
+                    addOption(subjectDropdown, "Subject 1 Option 3", "subject1_opt3");
+                    break;
+                case "subject2":
+                    addOption(subjectDropdown, "Subject 2 Option 1", "subject2_opt1");
+                    addOption(subjectDropdown, "Subject 2 Option 2", "subject2_opt2");
+                    // Add more options as needed
+                    break;
+                case "subject3":
+                    addOption(subjectDropdown, "Subject 3 Option 1", "subject3_opt1");
+                    // Add more options as needed
+                    break;
+                // Add more cases for other subject codes
+            }
+        }
+
+        // Function to add options to the second dropdown
+        function addOption(selectElement, text, value) {
+            var option = document.createElement("option");
+            option.text = text;
+            option.value = value;
+            selectElement.add(option);
+        }
+
+        // Call the updateSubject function initially to populate the second dropdown based on the default selection
+        updateSubject();
+    </script>
+</body>
+</html>
