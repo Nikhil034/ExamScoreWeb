@@ -68,6 +68,17 @@
   <input class="form-control" type="text" placeholder="NAMEXXXX" aria-label="default input example" name="sname" Required>
 
   <br>
+
+  <label>*GENDER</label>
+<select class="form-select" aria-label="Default select example" name="ssgender" Required>
+  <option selected>Select</option>
+  <option value="MALE">MALE</option>
+  <option value="FEMALE">FEMALE</option>
+  <option value="OTHERS">OTHERS</option>
+</select>
+
+
+  <br>
   <label>*EMAIL</label>
   <input class="form-control" type="email" placeholder="abc@gmail.com" aria-label="default input example" name="semail" Required>
 
@@ -145,6 +156,7 @@ if(isset($_POST['sbtn']))
 
   $prn=$_POST['sprn'];
   $name=$_POST['sname'];
+  $gender=$_POST['ssgender'];
   $eml=$_POST['semail'];
   $pass=$_POST['spass'];
   $stream=$_POST['sstrem'];
@@ -152,7 +164,7 @@ if(isset($_POST['sbtn']))
   $phno=$_POST['snumber'];
   $add=$_POST['sadd'];
 
-  $query=mysqli_query($con,"insert into student_tbl(Student_prn,Student_name,Student_email,Student_password,Student_stream,Student_year,Student_contact,Student_address,Isthere)values('$prn','$name','$eml','$pass','$stream','$year','$phno','$add',1)");
+  $query=mysqli_query($con,"insert into student_tbl(Student_prn,Student_name,Student_gender,Student_email,Student_password,Student_stream,Student_year,Student_contact,Student_address,Isthere)values('$prn','$name','$gender','$eml','$pass','$stream','$year','$phno','$add',1)");
 
 
   if($query)
