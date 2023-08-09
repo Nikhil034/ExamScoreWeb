@@ -255,11 +255,6 @@ else
   </div>
 </div>
 
-
-
-
-    
-
     </tr>
 
     <?php
