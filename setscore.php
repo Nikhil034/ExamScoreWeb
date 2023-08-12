@@ -4,7 +4,8 @@ include 'connection.php';
 
 
 $stream=$_GET['stream'];
-$query=mysqli_query($con,"select Student_prn,Student_name from student_tbl where Student_stream='$stream'");
+$syear=$_GET['syear'];
+$query=mysqli_query($con,"select Student_prn,Student_name,Student_year from student_tbl where Student_stream='$stream'");
 
 $scode=$_GET['scode'];
 $query2=mysqli_query($con,"select scode,Subject_totalmarks,Subject_examdate from subject_tbl where scode='$scode'");
@@ -36,6 +37,9 @@ $row=mysqli_fetch_array($query2);
     <b>Exam Date :-<?php echo $row['Subject_examdate'];?></b> 
     |
     <b>Total Mark :- <?php echo $row['Subject_totalmarks'];?></b><input type="hidden" name="total_mrk" value="<?php echo $row['Subject_totalmarks'];?>">
+    |
+    <b>Year :- <?php echo $syear;?><input type="hidden" name="sub_year" value="<?php echo $syear;?>">  
+
 
   </div>
   <div class="card-body">
@@ -75,9 +79,13 @@ $row=mysqli_fetch_array($query2);
     
     marks.forEach((mark, index) => {
       mark.addEventListener('blur', function() {
-        if (mark.value > 15) {
+        if (mark.value > 15 && mark.value<=30) {
           statuses[index].value = "PASS";
-        } else {
+        }
+        else if(mark.value<0 || mark.value>30){
+        	alert('Invalid marks');
+        } 
+        else {
           statuses[index].value = "FAIL";
         }
       });
@@ -116,6 +124,23 @@ if(isset($_POST['otherbtn']))
     $sid = $_POST['sub_code'];
     $flag = true; // Change to boolean for better clarity
 
+     $querycheck=mysqli_query($con,"select Subject_id from result_tbl where Subject_id='$sid'");
+     $IsAlreadydone=mysqli_num_rows($querycheck);
+
+     if($IsAlreadydone>0)
+     {
+
+     	 echo "<script>
+          swal({
+           title: 'Info!',
+           text: 'Already result is done!',
+           icon: 'info',
+            });
+          </script>";
+     }
+     else
+     {
+
     foreach($stud_prn as $key => $n)
     {
         $student_prn = mysqli_real_escape_string($con, $n);
@@ -124,7 +149,9 @@ if(isset($_POST['otherbtn']))
         $marks_obtained = mysqli_real_escape_string($con, $obt_mrk[$key]);  //for prevent sql injection 
         $status = mysqli_real_escape_string($con, $res_status[$key]);
 
-        $query = "INSERT INTO result_tbl (Student_prn, Subject_id, Subject_totalmarks, Subject_marksget, Result_status) VALUES ('$student_prn', '$subject_id', '$subject_total', '$marks_obtained', '$status')";
+       
+
+        $query = "INSERT INTO result_tbl(Student_prn,Student_year,Subject_id, Subject_totalmarks, Subject_marksget, Result_status) VALUES ('$student_prn','$syear', '$subject_id', '$subject_total', '$marks_obtained', '$status')";
 
         $isFire = mysqli_query($con, $query);
 
@@ -134,9 +161,11 @@ if(isset($_POST['otherbtn']))
         }
     }
 
-      if($flag)
-  {
-    echo "<script>
+
+
+    if($flag)
+   {
+     echo "<script>
           swal({
            title: 'Success!',
            text: 'Exam result succesfully saved!',
@@ -148,6 +177,7 @@ if(isset($_POST['otherbtn']))
   }
   else
   {
+
     echo "<script>
           swal({
            title: 'Failure!',
@@ -156,6 +186,9 @@ if(isset($_POST['otherbtn']))
             });
           </script>";
   }
+  }
+
+ 
 
 }
 
