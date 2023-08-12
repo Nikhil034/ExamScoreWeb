@@ -41,7 +41,6 @@ else
   <div class="card">
   <div class="card-header">
      <a href="dashboard.php" class="btn btn-danger" style="float: right;">X</a>
-        <a href="viewexam.php" class="btn btn-success" style="float: left;">View Result</a>
   </div>
   <div class="card-body text-center">
      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToQThvkzQ2sFZu0lIpor6NVMaN4vmIhCbPkw&usqp=CAU" style="height: auto;width: auto;border-radius: 20px">
@@ -83,6 +82,7 @@ else
      ?>      
     </select>
     <br> 
+     <button type="submit" name="viewbtn" class="btn btn-info" formaction="viewresult.php">View Result</button>
      <button type="submit" name="sbtn" class="btn btn-success" formaction="setscore.php">Submit</button>
      <a href="dashboard.php" class="btn btn-warning">Cancel</a>
 
