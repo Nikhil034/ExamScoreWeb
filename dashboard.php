@@ -326,17 +326,74 @@ h3
         </a>
         <br>
         <a href="setexam.php">
+            <?php
+            if(isset($emlpf))
+            {
+            ?>    
             <i class="fa fa-tasks"></i>
             Set Exam
         </a>
+        <?php
+         }
+         ?>
+
+         <a href="studentviewexam.php">
+            <?php
+            if(isset($emlst))
+            {
+            ?>    
+            <i class="fa fa-tasks"></i>
+            View Exam
+        </a>
+        <?php
+         }
+         ?>
         <a href="setresult.php">
+            <?php
+            if(isset($emlpf))
+            {
+            ?>    
             <i class="fa fa-book"></i>
             Set Result
         </a>
+        <?php
+         }
+         ?>
+          <a href="studentviewresult.php">
+            <?php
+            if(isset($emlst))
+            {
+            ?>    
+            <i class="fa fa-tasks"></i>
+            View Result
+        </a>
+        <?php
+         }
+         ?>
         <a href="profileprofessor.php">
+            <?php
+            if(isset($emlpf))
+            {
+
+            ?>
             <i class="fa fa-newspaper-o"></i>
             Profile
         </a>
+    <?php  } ?>
+
+     <a href="studentviewprofile.php">
+            <?php
+            if(isset($emlst))
+            {
+            ?>    
+            <i class="fa fa-tasks"></i>
+            View Profile
+        </a>
+        <?php
+         }
+         ?>
+
+
     </ul>
 </div>
 
