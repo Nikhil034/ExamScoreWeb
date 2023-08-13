@@ -106,29 +106,53 @@ if(isset($_POST['sbtn']))
 
   $eml=$_POST['seml'];
   $psw=$_POST['spass'];
+  $query0=mysqli_query($con,"select Student_email from student_tbl where Student_email='$eml'");
+  $IsValidEmail=mysqli_fetch_array($query0);
 
-  $query=mysqli_query($con,"select Student_prn from student_tbl where Student_email='$eml' and Student_password='$psw'");
-
-  $isAuth=mysqli_fetch_array($query);
-
-  if($isAuth)
+  if($IsValidEmail)
   {
+      $query1=mysqli_query($con,"select Student_password from student_tbl where Student_email='$eml'");
+      $isValidPassword=mysqli_fetch_array($query1);
 
-    $_SESSION['AuthStudent']=$eml;
-    header("location:dashboard.php");
+       
+      $storedHashedPassword = $isValidPassword[0];  
+      $userInputPassword = $psw;
+      $hashedInputPassword = sha1($userInputPassword);
 
-    
-  }
-  else
-  {
-     echo "<script>
+      if ($hashedInputPassword === $storedHashedPassword)
+      {
+            
+          $_SESSION['AuthStudent']=$eml;
+          header("location:dashboard.php");
+          
+      }
+      else
+      {
+
+        echo "<script>
           swal({
            title: 'Fail!',
-           text: 'Plese check your email or password!',
+           text: 'Incorrect Password!',
            icon: 'error',
             });
           </script>";
+               
+      }
   }
+  else
+  {
+
+    echo "<script>
+          swal({
+           title: 'Fail!',
+           text: 'Incorrect email!',
+           icon: 'error',
+            });
+          </script>";
+
+  }
+  
+
 
 }
 
