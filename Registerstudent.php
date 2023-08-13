@@ -159,12 +159,17 @@ if(isset($_POST['sbtn']))
   $gender=$_POST['ssgender'];
   $eml=$_POST['semail'];
   $pass=$_POST['spass'];
+  $hashedPassword = sha1($pass);
   $stream=$_POST['sstrem'];
   $year=$_POST['syear'];
   $phno=$_POST['snumber'];
   $add=$_POST['sadd'];
 
-  $query=mysqli_query($con,"insert into student_tbl(Student_prn,Student_name,Student_gender,Student_email,Student_password,Student_stream,Student_year,Student_contact,Student_address,Isthere)values('$prn','$name','$gender','$eml','$pass','$stream','$year','$phno','$add',1)");
+
+
+
+
+  $query=mysqli_query($con,"insert into student_tbl(Student_prn,Student_name,Student_gender,Student_email,Student_password,Student_stream,Student_year,Student_contact,Student_address,Isthere)values('$prn','$name','$gender','$eml','$hashedPassword','$stream','$year','$phno','$add',1)");
 
 
   if($query)
@@ -185,7 +190,7 @@ if(isset($_POST['sbtn']))
            text: 'Something went wrong,try again!',
            icon: 'error',
             });
-          </script>";
+          </script>";  
   }
 
   
