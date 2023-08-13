@@ -52,7 +52,7 @@ $row=mysqli_fetch_array($query);
                <div class="col">
                 <label  style="float:left;">Professor Password</label>
                  <input type="Password" class="form-control" id="psw" value="<?php echo $row[3];?>" name="eppass">
-                 <script type="text/javascript">
+                <!--  <script type="text/javascript">
                    const ps=document.getElementById('psw');
                    ps.addEventListener('focus',function(){
                     ps.type="text";
@@ -60,7 +60,8 @@ $row=mysqli_fetch_array($query);
                    ps.addEventListener('blur',function(){
                     ps.type="Password";
                    });
-                 </script>
+                 </script> -->
+                 
                </div>
                <div class="col">
                 <label  style="float:left;">Professor Contact</label>
