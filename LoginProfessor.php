@@ -105,29 +105,73 @@ if(isset($_POST['sbtn']))
 
   $eml=$_POST['pemail'];
   $psw=$_POST['ppass'];
+ 
 
-  $query=mysqli_query($con,"select id from professor_tbl where Professor_email='$eml' and Professor_password='$psw'");
+  $query0=mysqli_query($con,"select Professor_email from professor_tbl where Professor_email='$eml'");
+  $IsValidEmail=mysqli_fetch_array($query0);
 
-  $isAuth=mysqli_fetch_array($query);
-
-
-  if($isAuth)
+  if($IsValidEmail)
   {
-    $_SESSION['AuthProfessor']=$eml;
-    header("location:dashboard.php");
-  }
-   else
-  {
-     echo "<script>
+      $query1=mysqli_query($con,"select Professor_password from professor_tbl where Professor_email='$eml'");
+      $isValidPassword=mysqli_fetch_array($query1);
+
+       
+      $storedHashedPassword = $isValidPassword[0];  
+      $userInputPassword = $psw;
+      $hashedInputPassword = sha1($userInputPassword);
+
+      if ($hashedInputPassword === $storedHashedPassword)
+      {
+            
+          $_SESSION['AuthProfessor']=$eml;
+          header("location:dashboard.php");
+          
+      }
+      else
+      {
+
+        echo "<script>
           swal({
            title: 'Fail!',
-           text: 'Plese check your email or password!',
+           text: 'Incorrect Password!',
            icon: 'error',
             });
           </script>";
+               
+      }
   }
+  else
+  {
+
+    echo "<script>
+          swal({
+           title: 'Fail!',
+           text: 'Incorrect email!',
+           icon: 'error',
+            });
+          </script>";
+
+  }
+  
+
 
 }
+
+
+ // $ency=sha1($psw);
+
+ //  // $query=mysqli_query($con,"select id from professor_tbl where Professor_email='$eml' and Professor_password='$psw'");
+ //  $query=mysqli_query($con,"update professor_tbl set Professor_password='$ency' where Professor_email='$eml'");
+
+ //  if($query){
+ //    echo "1";
+ //  }
+ //  else{
+ //    echo "0";
+
+
+
+ //  }
 
 
 
