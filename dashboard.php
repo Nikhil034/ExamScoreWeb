@@ -3,6 +3,7 @@
 
 
 session_start();
+include 'connection.php';
 
 
 //Code for redirect if professor or student is try to access without login
@@ -10,6 +11,8 @@ session_start();
 if(isset($_SESSION['AuthStudent']))
 {
   $emlst=$_SESSION['AuthStudent'];
+  $query=mysqli_query($con,"select Student_name from student_tbl where Student_email='$emlst'");
+  $name=mysqli_fetch_array($query);
 }
 else if(isset($_SESSION['AuthProfessor']))
 {
@@ -24,8 +27,6 @@ else
 
 
 //Code for count student of mca and be and return total amount of student for dashboard
-
-include 'connection.php';
 $query1=mysqli_query($con,"select Student_prn from student_tbl where  Student_stream='MCA'");
 $countmca=mysqli_num_rows($query1);
 
@@ -403,6 +404,9 @@ h3
             <a href="logout.php"><p class="btc-price">Logout</p></a>
         </div>
     </div>
+
+     
+
     <div class="all">
         <div class="starter-stats">
             <div class="blok">
@@ -428,19 +432,43 @@ h3
                     <p><?php echo $countbe;?></p>
                 </div>
             </div>
+
+ 
+
             <div class="clear"></div>
             <div class="gains">
 
-                <h3>Welcome Professor,Test</h3>
+              
+               <?php
+                 if(isset($name))
+                 {
+                ?>    
+                <h3>Welcome Student,<?php echo $name[0] ;?></h3>
+
+               <?php } ?> 
+
+               <?php
+                 if(isset($emlpf))
+                 {
+                ?>    
+                <h3>Welcome Professor</h3>
+
+               <?php } ?> 
 
                 <img src="dash.png" style="width: 70%;margin-left: 110px;"></img>
 
                 <br>
 
+               <?php
+                if(isset($emlpf))
+                {
+               ?>  
                
               <div class="btn"> 
               <a href="mcaclass.php" class="btn"><button>MCA CLASS</button></a>
               <a href="beclass.php" class="btn"><button>BE CLASS</button></a>
+
+          <?php } ?>
               </div>    
                   
 
