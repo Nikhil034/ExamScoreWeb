@@ -7,6 +7,13 @@ include 'connection.php';
 if(isset($_SESSION['AuthStudent']))
 {
   $emlst=$_SESSION['AuthStudent'];
+  $query0=mysqli_query($con,"select Student_stream from student_tbl where Student_email='$emlst'");
+  $stream=mysqli_fetch_array($query0);
+  $query1=mysqli_query($con,"select subject_tbl.scode,exam_subject_tbl.Subject_name,subject_tbl.Subject_totalmarks,subject_tbl.Subject_examdate from subject_tbl inner join exam_subject_tbl on subject_tbl.scode=exam_subject_tbl.Subject_code where subject_tbl.scode LIKE '$stream[0]%'");
+
+  $row1=mysqli_fetch_array($query1);
+  print_r($row1);
+  die();
 }
 else if(isset($_SESSION['AuthProfessor']))
 {
@@ -39,7 +46,7 @@ else
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <title>Set Exam</title>
+    <title>View Exam</title>
   </head>
   <body>
     <br><br>
