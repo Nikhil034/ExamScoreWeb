@@ -158,21 +158,5 @@ if(isset($_POST['sbtn']))
 }
 
 
- // $ency=sha1($psw);
-
- //  // $query=mysqli_query($con,"select id from professor_tbl where Professor_email='$eml' and Professor_password='$psw'");
- //  $query=mysqli_query($con,"update professor_tbl set Professor_password='$ency' where Professor_email='$eml'");
-
- //  if($query){
- //    echo "1";
- //  }
- //  else{
- //    echo "0";
-
-
-
- //  }
-
-
 
 ?>
