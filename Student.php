@@ -75,6 +75,8 @@
     <button type="submit" name="sbtn"  class="btn btn-info">Login</button>
 
     <a href="Registerstudent.php" class="btn btn-warning">Not Yet Register</a>
+
+    <a href="forgotpassword.php" class="btn btn-outline-danger">Forgot password ?</a>
   
     </div>
 
